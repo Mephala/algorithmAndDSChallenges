@@ -12,11 +12,11 @@ public class Solution {
      * Complete the simpleArraySum function below.
      */
     static int simpleArraySum(int[] ar) {
-        /*
-         * Write your code here.
-         */
-        return 9;
-
+        int total = 0;
+        for (int i : ar) {
+            total += i;
+        }
+        return total;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
