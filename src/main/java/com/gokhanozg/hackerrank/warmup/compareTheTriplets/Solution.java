@@ -15,7 +15,18 @@ public class Solution {
     // Complete the solve function below.
     static int[] solve(int[] a, int[] b) {
 
-        return null;
+        int alice = 0;
+        int bob = 0;
+        for (int i = 0; i < 3; i++) {
+            if (a[i] > b[i]) {
+                alice++;
+            } else if (a[i] < b[i]) {
+                bob++;
+            }
+        }
+        int[] retval = {alice, bob};
+        return retval;
+
     }
 
     public static void main(String[] args) throws IOException {
