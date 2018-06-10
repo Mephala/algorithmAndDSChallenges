@@ -1,4 +1,4 @@
-package com.gokhanozg.codility.timeComplexity.fronJmp;
+package com.gokhanozg.codility.timeComplexity.frogJmp;
 
 public class TestSolution {
 
