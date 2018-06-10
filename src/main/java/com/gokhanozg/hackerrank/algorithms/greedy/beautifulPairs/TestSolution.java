@@ -1,4 +1,4 @@
-package com.gokhanozg.hackerrank.greedy.beautifulPairs;
+package com.gokhanozg.hackerrank.algorithms.greedy.beautifulPairs;
 
 public class TestSolution {
     public static void main(String[] args) {

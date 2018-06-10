@@ -1,12 +1,7 @@
-package com.gokhanozg.hackerrank.greedy.reverseShuffleMerge;
+package com.gokhanozg.hackerrank.algorithms.greedy.reverseShuffleMerge;
 
 import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
 import java.util.*;
-import java.util.concurrent.*;
-import java.util.regex.*;
 
 public class Solution {
 
@@ -14,7 +9,7 @@ public class Solution {
 
     // Complete the reverseShuffleMerge function below.
     static String reverseShuffleMerge(String s) {
-
+        //TODO: complete this.
         return "asdfa";
     }
 

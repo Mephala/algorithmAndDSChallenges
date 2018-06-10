@@ -1,4 +1,4 @@
-package com.gokhanozg.hackerrank.implementation.matrixLayerRotation;
+package com.gokhanozg.hackerrank.algorithms.implementation.matrixLayerRotation;
 
 public class TestSol {
 

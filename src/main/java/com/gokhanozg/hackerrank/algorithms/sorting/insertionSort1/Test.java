@@ -1,4 +1,4 @@
-package com.gokhanozg.hackerrank.sorting.insertionSort1;
+package com.gokhanozg.hackerrank.algorithms.sorting.insertionSort1;
 
 public class Test {
     public static void main(String[] args) {

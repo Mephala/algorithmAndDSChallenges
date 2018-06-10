@@ -1,4 +1,4 @@
-package com.gokhanozg.hackerrank.sorting.introToTutorialChallenges;
+package com.gokhanozg.hackerrank.algorithms.sorting.introToTutorialChallenges;
 
 public class Test {
     public static void main(String[] args) {
