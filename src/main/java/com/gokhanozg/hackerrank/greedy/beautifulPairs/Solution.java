@@ -14,8 +14,31 @@ public class Solution {
 
     // Complete the beautifulPairs function below.
     static int beautifulPairs(int[] A, int[] B) {
-
-        return 9;
+        int retval = 0;
+        int N = A.length;
+        List<Integer> nonPairedAIndices = new ArrayList<>();
+        List<Integer> nonPairedBIndices = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            nonPairedAIndices.add(i);
+            nonPairedBIndices.add(i);
+        }
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (A[i] == B[j]) {
+                    if (nonPairedAIndices.contains(i) && nonPairedBIndices.contains(j)) {
+                        nonPairedAIndices.remove(Integer.valueOf(i));
+                        nonPairedBIndices.remove(Integer.valueOf(j));
+                        retval++;
+                    }
+                }
+            }
+        }
+        if (nonPairedAIndices.size() > 0 && nonPairedBIndices.size() > 0) {
+            retval++;
+        } else {
+            retval--;
+        }
+        return retval;
     }
 
     public static void main(String[] args) throws IOException {
