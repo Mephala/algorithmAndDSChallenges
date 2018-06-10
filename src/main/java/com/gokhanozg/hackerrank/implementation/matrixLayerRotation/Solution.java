@@ -11,52 +11,71 @@ import java.util.regex.*;
 public class Solution {
 
     private static final Scanner scanner = new Scanner(System.in);
+    private static Map<Integer, Integer> rectangleResetRotationMap = new HashMap<Integer, Integer>();
 
     // Complete the matrixRotation function below.
     static void matrixRotation(int[][] matrix, int r) {
-        for (int i = 0; i < r; i++) {
-            rotateMatrix(matrix);
+        final int n = matrix[0].length;
+        final int m = matrix.length;
+        int resetRotation = findResetRotation(m, n);
+        int minmn = Math.min(m, n);
+        int rectangleCount = minmn / 2;
+        for (int i = 0; i < rectangleCount; i++) {
+            rectangleResetRotationMap.put(i, findResetRotation(m - (i * 2), n - (i * 2)));
         }
+        rotateMatrix(matrix, r);
         printMatrix(matrix);
     }
 
-    private static void rotateMatrix(int[][] matrix) {
+    private static int findResetRotation(int m, int n) {
+        return 1 + (m - 1) + (n - 1) + (n - 1) + (m - 2);
+    }
+
+    private static void rotateMatrix(int[][] matrix, int r) {
         final int n = matrix[0].length;
         final int m = matrix.length;
         int minmn = Math.min(m, n);
         int rectangleCount = minmn / 2;
         for (int i = 0; i < rectangleCount; i++) {
-            int leftmost = matrix[i][i];
-            for (int j = i; j < n - i; j++) {
-                if (!((j + 1) == (n - i))) {
-                    matrix[i][j] = matrix[i][j + 1];
+            int rotateCount = r % rectangleResetRotationMap.get(i);
+            for (int p = 0; p < rotateCount; p++) {
+                int leftmost = matrix[i][i];
+                for (int j = i; j < n - i; j++) {
+                    if (!((j + 1) == (n - i))) {
+                        matrix[i][j] = matrix[i][j + 1];
+                    }
                 }
-            }
-            for (int j = i; j < m - i; j++) {
-                if (!((j + 1) == (n - i))) {
-                    matrix[j][n - 1 - i] = matrix[j + 1][n - 1 - i];
+                for (int j = i; j < m - i; j++) {
+                    if (!((j + 1) == (m - i))) {
+                        matrix[j][n - 1 - i] = matrix[j + 1][n - 1 - i];
+                    }
                 }
-            }
-            for (int j = n - 1 - i; j > i; j--) {
-                if (!(j - 1 == i - 1)) {
-                    matrix[m - 1 - i][j] = matrix[m - 1 - i][j - 1];
+                for (int j = n - 1 - i; j > i; j--) {
+                    if (!(j - 1 == i - 1)) {
+                        matrix[m - 1 - i][j] = matrix[m - 1 - i][j - 1];
+                    }
                 }
-            }
-            for (int j = m - 1 - i; j > i; j--) {
-                if (!(j - 1 == i)) {
-                    matrix[j][i] = matrix[j - 1][i];
+                for (int j = m - 1 - i; j > i; j--) {
+                    if (!(j - 1 == i)) {
+                        matrix[j][i] = matrix[j - 1][i];
+                    }
                 }
+                matrix[i + 1][i] = leftmost;
             }
-            matrix[i + 1][i] = leftmost;
         }
     }
 
     private static void printMatrix(int[][] matrix) {
+        String retval = stringifyMatrix(matrix);
+        System.out.println(retval);
+    }
+
+    private static String stringifyMatrix(int[][] matrix) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 sb.append(matrix[i][j]);
-                if (j == 3) {
+                if (j == matrix[0].length - 1) {
                     sb.append(System.getProperty("line.separator"));
                 } else {
                     sb.append(" ");
@@ -64,7 +83,7 @@ public class Solution {
 
             }
         }
-        System.out.println(sb.toString());
+        return sb.toString();
     }
 
 
