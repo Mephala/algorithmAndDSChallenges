@@ -14,6 +14,8 @@ class Solution {
         }
         double minAvg = Double.MAX_VALUE;
         int minIndice = -1;
+        // Slice len =3 is enough, bcuz any larger slice has to contain this one and other smaller sized slices should have equal avg value
+        // otherwise they should be smallest slice anyways.
         for (int sliceLen = 2; sliceLen <= 3; sliceLen++) {
             for (int i = 0; i < A.length - sliceLen + 1; i++) {
                 long sum;
