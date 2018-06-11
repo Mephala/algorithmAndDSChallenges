@@ -1,13 +1,10 @@
 
 package com.gokhanozg.codility.prefixSums.MinAvgTwoSlice;
 
-import java.util.HashMap;
-import java.util.Map;
-
 class Solution {
     public int solution(int[] A) {
 
-        int[] sums = new int[A.length];
+        long[] sums = new long[A.length];
         for (int i = 0; i < A.length; i++) {
             if (i == 0) {
                 sums[i] = A[i];
@@ -15,24 +12,23 @@ class Solution {
                 sums[i] = sums[i - 1] + A[i];
             }
         }
-        Map<Double, Integer> averageIndexMap = new HashMap<>();
         double minAvg = Double.MAX_VALUE;
-        for (int i = 0; i < A.length - 1; i++) {
-            for (int j = i + 1; j < A.length; j++) {
-                int elements = j - i + 1;
-                int sum;
-                if (j - elements == -1) {
-                    sum = sums[j];
+        int minIndice = -1;
+        for (int sliceLen = 2; sliceLen <= 3; sliceLen++) {
+            for (int i = 0; i < A.length - sliceLen + 1; i++) {
+                long sum;
+                if (i == 0) {
+                    sum = sums[i + sliceLen - 1];
                 } else {
-                    sum = sums[j] - sums[j - elements];
+                    sum = sums[i + sliceLen - 1] - sums[i - 1];
                 }
-                double avg = ((double) sum) / elements;
-                if (!averageIndexMap.containsKey(avg) || i < averageIndexMap.get(avg))
-                    averageIndexMap.put(avg, i);
-                if (avg < minAvg)
+                double avg = (double) sum / sliceLen;
+                if (avg < minAvg) {
+                    minIndice = i;
                     minAvg = avg;
+                }
             }
         }
-        return averageIndexMap.get(minAvg);
+        return minIndice;
     }
 }
