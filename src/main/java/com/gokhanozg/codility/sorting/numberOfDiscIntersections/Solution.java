@@ -8,6 +8,8 @@ import java.util.List;
 class Solution {
 
     public int solution(int[] A) {
+
+
         // write your code in Java SE 8
         List<Disk> diskList = new ArrayList<>();
         for (int i = 0; i < A.length; i++) {
@@ -37,21 +39,23 @@ class Solution {
         if (jumpSize == 0)
             jumpSize = 1;
         int searchIndex = i - jumpSize;
+        if (searchIndex == -1)
+            searchIndex = 0;
         int leftMostIndex = i;
         while (true) {
             jumpSize = jumpSize / 2;
             if (jumpSize == 0)
                 jumpSize = 1;
-            if (searchIndex == 0) {
-                leftMostIndex = 0;
-                break;
-            }
             if (searchIndex == i) {
                 leftMostIndex = i;
                 break;
             }
             Disk d = diskList.get(searchIndex);
             if (d.rightmost >= farthestIntersectPoint) {
+                if (searchIndex == 0) {
+                    leftMostIndex = 0;
+                    break;
+                }
                 //keep going left.
                 leftMostIndex = searchIndex;
                 searchIndex -= jumpSize;
@@ -72,8 +76,8 @@ class Solution {
         long leftmost;
 
         Disk(int origin, int r) {
-            this.rightmost = origin + r;
-            this.leftmost = origin - r;
+            this.rightmost = (long) origin + (long) r;
+            this.leftmost = (long) origin - (long) r;
             if (leftmost < 0) {
                 leftmost = 0; // no need to calculate negative zones, no disk originates at negative zone.
             }
