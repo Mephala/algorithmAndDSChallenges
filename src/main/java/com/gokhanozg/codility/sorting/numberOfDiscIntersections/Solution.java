@@ -8,7 +8,8 @@ import java.util.List;
 class Solution {
 
     public int solution(int[] A) {
-
+        // idea, sort the disks based on their "rightMost" point, do a binary search for each element to
+        // find which disk it includes. O(n) = nlogn variant algorithm.
 
         // write your code in Java SE 8
         List<Disk> diskList = new ArrayList<>();
