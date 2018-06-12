@@ -35,41 +35,23 @@ class Solution {
     }
 
     private long findIntersections(Disk rightMostDisk, int i, List<Disk> diskList) {
-        long farthestIntersectPoint = rightMostDisk.leftmost;
-        int jumpSize = i / 2;
-        if (jumpSize == 0)
-            jumpSize = 1;
-        int searchIndex = i - jumpSize;
-        if (searchIndex == -1)
-            searchIndex = 0;
-        int leftMostIndex = i;
-        while (true) {
-            jumpSize = jumpSize / 2;
-            if (jumpSize == 0)
-                jumpSize = 1;
-            if (searchIndex == i) {
-                leftMostIndex = i;
-                break;
-            }
-            Disk d = diskList.get(searchIndex);
-            if (d.rightmost >= farthestIntersectPoint) {
-                if (searchIndex == 0) {
-                    leftMostIndex = 0;
-                    break;
-                }
-                //keep going left.
-                leftMostIndex = searchIndex;
-                searchIndex -= jumpSize;
+        int high = i - 1;
+        int low = 0;
+        long searchRightMost = rightMostDisk.leftmost;
+        int leftMostPoint = i;
+        while (high >= low) {
+            int mid = (high + low) / 2;
+            Disk midDisk = diskList.get(mid);
+            if (midDisk.rightmost >= searchRightMost) {
+                //go left
+                high = mid - 1;
+                leftMostPoint = mid;
             } else {
-                //keep going right.
-                searchIndex += jumpSize;
-                if (searchIndex == leftMostIndex) {
-                    //found limit point
-                    break;
-                }
+                //go right
+                low = mid + 1;
             }
         }
-        return i - leftMostIndex;
+        return i - leftMostPoint;
     }
 
     class Disk {
