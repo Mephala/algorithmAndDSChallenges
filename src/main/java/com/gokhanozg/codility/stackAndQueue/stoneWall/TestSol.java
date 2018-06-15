@@ -13,6 +13,6 @@ public class TestSol {
 //        System.out.println(new Solution().solution(new int[]{4, 4, 5, 5, 6, 6, 7, 7}));
         System.out.println(new Solution2().solution(new int[]{8, 5, 7, 8, 9, 8, 7, 4, 8}));
         System.out.println(new Solution2().solution(new int[]{5, 4, 3, 2, 1}));
-        System.out.println(new Solution2().solution(new int[]{1, 2, 3, 4, 5}));
+        System.out.println(new Solution2().solution(new int[]{1, 2, 3, 90, 4, 5}));
     }
 }
