@@ -15,9 +15,16 @@ public class Solution {
 
     // Complete the minuteToWinIt function below.
     static int minuteToWinIt(int[] a, int k) {
-
-        return 8;
-
+        Map<Long, Integer> distanceToCountMap = new HashMap<>();
+        int maxCount = 0;
+        long y = 0L;
+        for (int i = 0; i < a.length; i++) {
+            y = (long) i * (long) k;
+            long distance = y - a[i];
+            distanceToCountMap.put(distance, distanceToCountMap.getOrDefault(distance, 0) + 1);
+            maxCount = Math.max(distanceToCountMap.get(distance), maxCount);
+        }
+        return a.length - maxCount;
     }
 
 
