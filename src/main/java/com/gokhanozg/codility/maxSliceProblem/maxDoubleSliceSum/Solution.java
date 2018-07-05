@@ -13,9 +13,9 @@ class Solution {
         long grandMaxSlice = 0L;
         int startIndex = -1;
         int endIndex = -1;
-        for (int i = 0; i < A.length; i++) {
+        for (int i = 0; i < B.length; i++) {
             maxEnd = Math.max(0, maxEnd + A[i]);
-            if (A[i] != 0 && maxEnd == 0L) {
+            if (B[i] != 0 && maxEnd == 0L) {
                 elementCountInSlice = 0;
                 startIndex = -1;
             } else {
@@ -27,10 +27,19 @@ class Solution {
                 }
             }
             maxSlice = Math.max(maxSlice, maxEnd);
+            if (maxSlice > maxEnd)
+                endIndex--;
             if (elementCountInSlice >= 3 && maxSlice > grandMaxSlice) {
                 grandMaxSlice = maxSlice;
             }
         }
-        return (int) grandMaxSlice;
+        int lowest = Integer.MAX_VALUE;
+        for (int i = startIndex; i <= endIndex; i++) {
+            if (B[i] < lowest)
+                lowest = B[i];
+        }
+        if (lowest == Integer.MAX_VALUE)
+            lowest = 0; // N = 3 case normalization.
+        return (int) (grandMaxSlice - lowest);
     }
 }
