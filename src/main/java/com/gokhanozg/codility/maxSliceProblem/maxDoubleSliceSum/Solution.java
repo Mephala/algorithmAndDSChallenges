@@ -6,40 +6,34 @@ class Solution {
         for (int i = 0; i < B.length; i++) {
             B[i] = A[i + 1];
         }
-        A = B;
         long maxEnd = 0L;
         long maxSlice = 0L;
-        int elementCountInSlice = 0;
-        long grandMaxSlice = 0L;
-        int startIndex = -1;
-        int endIndex = -1;
+        int maxSliceStartIndex = -1;
+        int maxSliceEndIndex = 0;
+        int currentSliceStartIndex = 0;
+        int currentSliceEndIndex = -1;
         for (int i = 0; i < B.length; i++) {
-            maxEnd = Math.max(0, maxEnd + A[i]);
-            if (B[i] != 0 && maxEnd == 0L) {
-                elementCountInSlice = 0;
-                startIndex = -1;
+            if (maxEnd + B[i] > 0) {
+                maxEnd += B[i];
+                currentSliceEndIndex = i;
             } else {
-                elementCountInSlice++;
-                if (startIndex == -1) {
-                    startIndex = i;
-                } else {
-                    endIndex = i;
-                }
+                maxEnd = 0;
+                currentSliceEndIndex = i - 1;
+                currentSliceStartIndex = i + 1;
             }
-            maxSlice = Math.max(maxSlice, maxEnd);
-            if (maxSlice > maxEnd)
-                endIndex--;
-            if (elementCountInSlice >= 3 && maxSlice > grandMaxSlice) {
-                grandMaxSlice = maxSlice;
+            if (maxSlice < maxEnd) {
+                maxSliceStartIndex = currentSliceStartIndex;
+                maxSliceEndIndex = currentSliceEndIndex;
+                maxSlice = maxEnd;
             }
         }
         int lowest = Integer.MAX_VALUE;
-        for (int i = startIndex; i <= endIndex; i++) {
+        for (int i = maxSliceStartIndex; i <= maxSliceEndIndex; i++) {
             if (B[i] < lowest)
                 lowest = B[i];
         }
         if (lowest == Integer.MAX_VALUE)
             lowest = 0; // N = 3 case normalization.
-        return (int) (grandMaxSlice - lowest);
+        return (int) (maxSlice - lowest);
     }
 }
