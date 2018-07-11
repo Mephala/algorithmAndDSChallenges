@@ -2,38 +2,39 @@ package com.gokhanozg.codility.maxSliceProblem.maxDoubleSliceSum;
 
 class Solution {
     public int solution(int[] A) {
-        int[] B = new int[A.length - 2];
-        for (int i = 0; i < B.length; i++) {
-            B[i] = A[i + 1];
+        if (A.length == 3)
+            return 0;
+        long[] lr = new long[A.length - 2];
+        long[] rl = new long[A.length - 2];
+        long lrMax = 0L;
+        long rlMax = 0L;
+        for (int i = 0; i < A.length - 2; i++) {
+            lrMax = Math.max(0, A[i + 1] + lrMax);
+            lr[i] = lrMax;
         }
-        long maxEnd = 0L;
-        long maxSlice = 0L;
-        int maxSliceStartIndex = -1;
-        int maxSliceEndIndex = 0;
-        int currentSliceStartIndex = 0;
-        int currentSliceEndIndex = -1;
-        for (int i = 0; i < B.length; i++) {
-            if (maxEnd + B[i] > 0) {
-                maxEnd += B[i];
-                currentSliceEndIndex = i;
+        for (int i = A.length - 3; i >= 0; i--) {
+            rlMax = Math.max(0, rlMax + A[i + 1]);
+            rl[i] = rlMax;
+        }
+        long max = 0L;
+        for (int i = 0; i < lr.length; i++) {
+            if (i == 0) {
+                long dif = rl[i + 1];
+                if (dif > max) {
+                    max = dif;
+                }
+            } else if (i == lr.length - 1) {
+                long dif = lr[i - 1];
+                if (dif > max) {
+                    max = dif;
+                }
             } else {
-                maxEnd = 0;
-                currentSliceEndIndex = i - 1;
-                currentSliceStartIndex = i + 1;
-            }
-            if (maxSlice < maxEnd) {
-                maxSliceStartIndex = currentSliceStartIndex;
-                maxSliceEndIndex = currentSliceEndIndex;
-                maxSlice = maxEnd;
+                long dif = lr[i - 1] + rl[i + 1];
+                if (dif > max) {
+                    max = dif;
+                }
             }
         }
-        int lowest = Integer.MAX_VALUE;
-        for (int i = maxSliceStartIndex; i <= maxSliceEndIndex; i++) {
-            if (B[i] < lowest)
-                lowest = B[i];
-        }
-        if (lowest == Integer.MAX_VALUE)
-            lowest = 0; // N = 3 case normalization.
-        return (int) (maxSlice - lowest);
+        return (int) max;
     }
 }
