@@ -13,5 +13,6 @@ public class TestSol {
         System.out.println("2," + new Solution().solution(5));
         System.out.println("4," + new Solution().solution(8));
         System.out.println("5," + new Solution().solution(16));
+        System.out.println("2," + new Solution().solution(Integer.MAX_VALUE));
     }
 }
