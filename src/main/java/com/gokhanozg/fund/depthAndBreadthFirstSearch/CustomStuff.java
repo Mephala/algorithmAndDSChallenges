@@ -48,6 +48,11 @@ public class CustomStuff {
         TestImp.manualBinarySearch(arr, searchVal);
         differ = System.nanoTime() - start;
         System.out.println("Array find:" + differ);
+        start = System.nanoTime();
+        hs.contains(searchVal);
+        differ = System.nanoTime() - start;
+        System.out.println("Hs find:" + differ);
+
     }
 
 
