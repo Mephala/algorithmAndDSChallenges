@@ -42,7 +42,7 @@ public class TestImp {
         System.out.println("Done.");
     }
 
-    private static int manualBinarySearch(int[] arr, Integer val) {
+    public static int manualBinarySearch(int[] arr, Integer val) {
         int begin = 0;
         int end = arr.length - 1;
         int result = -1;
