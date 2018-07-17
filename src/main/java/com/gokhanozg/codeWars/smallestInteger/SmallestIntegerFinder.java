@@ -1,10 +1,12 @@
 package com.gokhanozg.codeWars.smallestInteger;
 
-import java.util.stream.IntStream;
-
 public class SmallestIntegerFinder {
     public static int findSmallestInt(int[] args) {
-        return IntStream.of(args).min().getAsInt();
+        int lowest = Integer.MAX_VALUE;
+        for (int arg : args) {
+            lowest = Math.min(arg, lowest);
+        }
+        return lowest;
 
     }
 }
