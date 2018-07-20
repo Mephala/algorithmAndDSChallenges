@@ -4,6 +4,9 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 class Solution {
+    //Fails on one case, achieves almost full score. Don't know yet why it fails. I will update once I have my curiosity
+    // is back on this : )
+
     public int solution(int[] A) {
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
         long sum1 = 0L;
