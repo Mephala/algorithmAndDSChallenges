@@ -15,7 +15,23 @@ public class Solution {
     // Complete the abbreviation function below.
     //https://www.hackerrank.com/challenges/abbr/problem
     static String abbreviation(String a, String b) {
-        return "k";
+        int prevIndex = 0;
+        for (int i = 0; i < b.length(); i++) {
+            Character c = b.charAt(i);
+            for (int j = prevIndex; j < a.length(); j++) {
+                Character tmp = a.charAt(j);
+                if (Character.isUpperCase(tmp) && !c.equals(tmp)) {
+                    return "NO";
+                } else if (Character.isLowerCase(tmp) && Character.toUpperCase(tmp) == c) {
+                    prevIndex = j + 1;
+                    break;
+                } else if (Character.isLowerCase(c) && Character.isUpperCase(tmp)) {
+                    return "NO";
+                }
+
+            }
+        }
+        return "YES";
 
     }
 
