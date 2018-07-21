@@ -7,6 +7,7 @@ public class TestSol {
     public static void main(String[] args) {
         System.out.println("0," + new Solution().solution(new int[]{3, 2, 2, 1}));
         System.out.println("0," + new Solution().solution(new int[]{1, 2, 5, 8}));
+        System.out.println("1," + new Solution().solution(new int[]{1, 2, 5, 8, 3}));
         System.out.println("0," + new Solution().solution(new int[]{1, -2, 5, 8}));
         System.out.println("0," + new Solution().solution(new int[]{1, 5, -2, 2}));
         System.out.println("0," + new Solution().solution(new int[]{2, 2, 3, 3, 8, 2, 2}));
