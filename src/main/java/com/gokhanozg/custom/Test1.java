@@ -3,7 +3,7 @@ package com.gokhanozg.custom;
 import java.util.*;
 
 /**
- * Created by Mephalay on 7/3/18.
+ * Created by Gokhan Ozgozen on 7/3/18.
  */
 public class Test1 {
 

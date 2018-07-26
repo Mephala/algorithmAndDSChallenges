@@ -1,7 +1,7 @@
 package com.gokhanozg.fund.dp;
 
 /**
- * Created by Mephalay on 26-Jul-18.
+ * Created by Gokhan Ozgozen on 26-Jul-18.
  */
 public class Steps {
 

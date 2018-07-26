@@ -1,7 +1,7 @@
 package com.gokhanozg.codility.stackAndQueue.brackets;
 
 /**
- * Created by Mephalay on 7/5/18.
+ * Created by Gokhan Ozgozen on 7/5/18.
  */
 public class TestSol {
 

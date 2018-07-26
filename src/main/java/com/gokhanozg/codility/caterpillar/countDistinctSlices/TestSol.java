@@ -1,7 +1,7 @@
 package com.gokhanozg.codility.caterpillar.countDistinctSlices;
 
 /**
- * Created by Mephalay on 14-Jul-18.
+ * Created by Gokhan Ozgozen on 14-Jul-18.
  */
 public class TestSol {
 

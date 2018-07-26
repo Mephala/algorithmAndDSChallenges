@@ -3,7 +3,7 @@ package com.gokhanozg.fund.caterpillar;
 import java.util.Random;
 
 /**
- * Created by Mephalay on 14-Jul-18.
+ * Created by Gokhan Ozgozen on 14-Jul-18.
  */
 public class TestImp {
 

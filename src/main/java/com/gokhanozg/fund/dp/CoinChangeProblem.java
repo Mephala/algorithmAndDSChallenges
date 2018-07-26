@@ -3,7 +3,7 @@ package com.gokhanozg.fund.dp;
 import java.util.Arrays;
 
 /**
- * Created by Mephalay on 17-Jul-18.
+ * Created by Gokhan Ozgozen on 17-Jul-18.
  */
 public class CoinChangeProblem {
 

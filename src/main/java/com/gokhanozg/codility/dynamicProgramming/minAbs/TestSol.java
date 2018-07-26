@@ -1,7 +1,7 @@
 package com.gokhanozg.codility.dynamicProgramming.minAbs;
 
 /**
- * Created by Mephalay on 19-Jul-18.
+ * Created by Gokhan Ozgozen on 19-Jul-18.
  */
 public class TestSol {
     public static void main(String[] args) {

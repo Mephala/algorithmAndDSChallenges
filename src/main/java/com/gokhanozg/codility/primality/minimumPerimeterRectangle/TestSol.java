@@ -1,7 +1,7 @@
 package com.gokhanozg.codility.primality.minimumPerimeterRectangle;
 
 /**
- * Created by Mephalay on 12-Jul-18.
+ * Created by Gokhan Ozgozen on 12-Jul-18.
  */
 public class TestSol {
 

@@ -1,7 +1,7 @@
 package com.gokhanozg.codility.dynamicProgramming.numberSolitaire;
 
 /**
- * Created by Mephalay on 17-Jul-18.
+ * Created by Gokhan Ozgozen on 17-Jul-18.
  */
 public class TestSol {
 

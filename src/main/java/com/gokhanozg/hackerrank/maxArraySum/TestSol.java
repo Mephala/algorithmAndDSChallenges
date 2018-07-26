@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mephalay on 21-Jul-18.
+ * Created by Gokhan Ozgozen on 21-Jul-18.
  */
 public class TestSol {
 

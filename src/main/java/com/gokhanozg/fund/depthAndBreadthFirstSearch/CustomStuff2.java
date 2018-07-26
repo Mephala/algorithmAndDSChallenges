@@ -3,7 +3,7 @@ package com.gokhanozg.fund.depthAndBreadthFirstSearch;
 import java.util.Objects;
 
 /**
- * Created by Mephalay on 13-Jul-18.
+ * Created by Gokhan Ozgozen on 13-Jul-18.
  */
 public class CustomStuff2 {
 

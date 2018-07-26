@@ -1,7 +1,7 @@
 package com.gokhanozg.misc.bloodyTable;
 
 /**
- * Created by Mephalay on 22-Jul-18.
+ * Created by Gokhan Ozgozen on 22-Jul-18.
  */
 
 import java.util.ArrayList;

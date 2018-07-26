@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.TreeSet;
 
 /**
- * Created by Mephalay on 13-Jul-18.
+ * Created by Gokhan Ozgozen on 13-Jul-18.
  */
 public class CustomStuff {
 

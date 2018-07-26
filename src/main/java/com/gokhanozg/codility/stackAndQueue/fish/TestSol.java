@@ -1,7 +1,7 @@
 package com.gokhanozg.codility.stackAndQueue.fish;
 
 /**
- * Created by Mephalay on 27-Jun-18.
+ * Created by Gokhan Ozgozen on 27-Jun-18.
  */
 public class TestSol {
 

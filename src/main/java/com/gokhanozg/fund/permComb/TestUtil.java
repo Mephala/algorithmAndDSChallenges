@@ -3,7 +3,7 @@ package com.gokhanozg.fund.permComb;
 import java.math.BigDecimal;
 
 /**
- * Created by Mephalay on 17-Jul-18.
+ * Created by Gokhan Ozgozen on 17-Jul-18.
  */
 public class TestUtil {
     public static void main(String[] args) {

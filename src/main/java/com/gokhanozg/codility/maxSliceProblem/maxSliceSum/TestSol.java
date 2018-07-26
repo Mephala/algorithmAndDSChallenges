@@ -1,7 +1,7 @@
 package com.gokhanozg.codility.maxSliceProblem.maxSliceSum;
 
 /**
- * Created by Mephalay on 11-Jul-18.
+ * Created by Gokhan Ozgozen on 11-Jul-18.
  */
 public class TestSol {
     public static void main(String[] args) {
