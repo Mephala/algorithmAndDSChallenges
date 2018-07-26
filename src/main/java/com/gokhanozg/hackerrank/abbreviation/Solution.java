@@ -33,6 +33,7 @@ public class Solution {
                 char ca = a.charAt(j - 1), cb = b.charAt(i - 1);
                 if (ca >= 'A' && ca <= 'Z') {
                     if (ca == cb) dp[i][j] = dp[i - 1][j - 1];
+                    else return "NO";
                 } else {
                     ca = Character.toUpperCase(ca);
                     if (ca == cb) dp[i][j] = dp[i - 1][j - 1] || dp[i][j - 1];
@@ -42,6 +43,24 @@ public class Solution {
         }
         return dp[b.length()][a.length()] ? "YES" : "NO";
     }
+//    static String abbreviationz(String a, String b) {
+//        boolean[][] dp = new boolean[b.length() + 1][a.length() + 1];
+//        for (int j = 0; j < dp[0].length; j++) dp[0][j] = true;
+//        for (int i = 1; i < dp.length; i++) {
+//            for (int j = 1; j < dp[0].length; j++) {
+//                char ca = a.charAt(j - 1), cb = b.charAt(i - 1);
+//                if (ca >= 'A' && ca <= 'Z') {
+//                    if (ca == cb) dp[i][j] = dp[i - 1][j - 1];
+//                    else return "NO";
+//                } else {
+//                    ca = Character.toUpperCase(ca);
+//                    if (ca == cb) dp[i][j] = dp[i - 1][j - 1] || dp[i][j - 1];
+//                    else dp[i][j] = dp[i][j - 1];
+//                }
+//            }
+//        }
+//        return dp[b.length()][a.length()] ? "YES" : "NO";
+//    }
 
     static long hash(String a, String b) {
         hashCount++;
