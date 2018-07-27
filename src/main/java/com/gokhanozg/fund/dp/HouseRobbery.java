@@ -1,7 +1,6 @@
 package com.gokhanozg.fund.dp;
 
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  * Created by Gokhan Ozgozen on 26-Jul-18.
@@ -9,14 +8,14 @@ import java.util.Random;
 public class HouseRobbery {
 
     public static void main(String[] args) {
-//        int[] h = new int[]{10, 8, 6, 4, 30};
-        final int len = 30000;
-        Random r = new Random();
-        int[] h = new int[len];
-        for (int i = 0; i < len; i++) {
-            h[i] = r.nextInt(100);
-        }
-//        System.out.println("Max = " + findMax(h));
+        int[] h = new int[]{1, 2, 3, 4, 5};
+//        final int len = 30000;
+//        Random r = new Random();
+//        int[] h = new int[len];
+//        for (int i = 0; i < len; i++) {
+//            h[i] = r.nextInt(100);
+//        }
+        System.out.println("Max = " + findMax(h));
         System.out.println("Max = " + findMaxDp(h));
     }
 
