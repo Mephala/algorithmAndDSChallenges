@@ -11,9 +11,15 @@ public class Solution {
 
     // Complete the rotLeft function below.
     static int[] rotLeft(int[] a, int d) {
-
-        return null;
+        int modl = d % a.length;
+        int[] rl = new int[a.length];
+        for (int i = 0; i < a.length; i++) {
+            int nextIndex = i + modl >= a.length ? (i + modl) % a.length : i + modl;
+            rl[i] = a[nextIndex];
+        }
+        return rl;
     }
+
 
     public static void main(String[] args) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
