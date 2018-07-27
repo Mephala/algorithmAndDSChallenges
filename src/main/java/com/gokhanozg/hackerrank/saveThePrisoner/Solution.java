@@ -24,7 +24,7 @@ public class Solution {
             if (last > n) {
                 return (int) (last % n);
             }
-            return (int) last;
+            return (int) last; //
         }
 
     }
