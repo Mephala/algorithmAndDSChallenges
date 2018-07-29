@@ -3,7 +3,7 @@ package com.gokhanozg.hackerrank.pickingNumbers;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Solution {
 
@@ -11,20 +11,18 @@ public class Solution {
 
     // Complete the pickingNumbers function below.
     static int pickingNumbers(int[] a) {
-        long total = 0L;
-        for (int i : a) {
-            total += i;
+        Map<Integer, Integer> occurence = new HashMap<>();
+        Set<Integer> vals = new HashSet<>();
+        for (int i = 0; i < a.length; i++) {
+            occurence.put(a[i], occurence.getOrDefault(a[i], 0) + 1);
+            vals.add(a[i]);
         }
-        double avg = total / (double) a.length;
-        int retval = 0;
-        for (int i : a) {
-            if (Math.abs(i - avg) <= 1) {
-                retval++;
-            }
+        int max = 0;
+        for (Integer val : vals) {
+            int total = Math.max(occurence.get(val) + occurence.getOrDefault(val - 1, 0), occurence.get(val) + occurence.getOrDefault(val + 1, 0));
+            max = Math.max(total, max);
         }
-        if (retval == 0)
-            return 1;
-        return retval;
+        return max;
     }
 
     public static void main(String[] args) throws IOException {
