@@ -1,7 +1,5 @@
 package com.gokhanozg.hackerrank.climbingTheLeaderboard;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -24,7 +22,7 @@ public class Solution {
         int[] aliceRanks = new int[alice.length];
         for (int i = 0; i < alice.length; i++) {
             int aliceRank = getRank(alice[i], scoresList, scoreRankMap);
-            scoreRankMap.put(alice[i], aliceRank);
+//            scoreRankMap.put(alice[i], aliceRank);
             aliceRanks[i] = aliceRank;
         }
         return aliceRanks;
@@ -45,7 +43,7 @@ public class Solution {
                 high = scoresList.get(mid);
                 highIndex = mid;
             } else if (scoresList.get(mid) == x) {
-                scoresList.add(mid, x);
+//                scoresList.add(mid, x);
                 return scoreRankMap.get(x);
             } else {
                 end = mid - 1;
@@ -62,18 +60,18 @@ public class Solution {
                 System.err.println("Bug2");
             }
             rank = scoreRankMap.get(low);
-            updateRanks(scoreRankMap, lowIndex, scoresList);
-            scoresList.add(lowIndex, x);
+//            updateRanks(scoreRankMap, lowIndex, scoresList);
+//            scoresList.add(lowIndex, x);
         } else if (low == -1) {
             // We have the worst rank.
             rank = scoreRankMap.size() + 1;
-            scoresList.add(x);
+//            scoresList.add(x);
             //no need to update ranks.
         } else {
             // We have the best score.
             rank = 1;
-            updateRanks(scoreRankMap, 0, scoresList);
-            scoresList.add(0, x);
+//            updateRanks(scoreRankMap, 0, scoresList);
+//            scoresList.add(0, x);
         }
         return rank;
 
@@ -86,7 +84,7 @@ public class Solution {
     }
 
     public static void main(String[] args) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+//        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
         int scoresCount = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
@@ -117,16 +115,17 @@ public class Solution {
         int[] result = climbingLeaderboard(scores, alice);
 
         for (int i = 0; i < result.length; i++) {
-            bufferedWriter.write(String.valueOf(result[i]));
+//            bufferedWriter.write(String.valueOf(result[i]));
+            System.out.println(result[i]);
 
-            if (i != result.length - 1) {
-                bufferedWriter.write("\n");
-            }
+//            if (i != result.length - 1) {
+//                bufferedWriter.write("\n");
+//            }
         }
 
-        bufferedWriter.newLine();
-
-        bufferedWriter.close();
+//        bufferedWriter.newLine();
+//
+//        bufferedWriter.close();
 
         scanner.close();
     }

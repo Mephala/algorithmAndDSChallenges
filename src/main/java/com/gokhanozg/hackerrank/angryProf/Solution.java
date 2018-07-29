@@ -9,14 +9,13 @@ public class Solution {
 
     // Complete the angryProfessor function below.
     static String angryProfessor(int k, int[] a) {
-        int nonLateNum = 0;
+        int onTime = 0;
         for (int i = 0; i < a.length; i++) {
-            nonLateNum = a[i] >= 0 ? nonLateNum + 1 : nonLateNum;
-            if (nonLateNum == k) {
-                return "NO";
+            if (a[i] <= 0) {
+                onTime++;
             }
         }
-        return "YES";
+        return onTime >= k ? "NO" : "YES";
     }
 
     public static void main(String[] args) throws IOException {
