@@ -1,6 +1,7 @@
 package com.gokhanozg.hackerrank.organizingContainers;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Solution {
@@ -8,19 +9,20 @@ public class Solution {
     private static final Scanner scanner = new Scanner(System.in);
 
     // Complete the organizingContainers function below.
-    static String organizingContainers(int[][] container) {
-        for (int i = 0; i < container.length; i++) {
-            for (int j = 0; j < container.length; j++) {
-                for (int k = 0; k < container[0].length; k++) {
-                    if (i == j) {
-                        //not operating on the same container.
-                        continue;
-                    }
-
-                }
+    static String organizingContainers(int[][] containers) {
+        long[] containerSums = new long[containers.length];
+        long[] ballSums = new long[containers.length];
+        for (int i = 0; i < containers.length; i++) {
+            long containerSum = 0L;
+            long ballSum = 0L;
+            for (int j = 0; j < containers.length; j++) {
+                containerSum += containers[i][j];
+                ballSum += containers[j][i];
             }
+            containerSums[i] = containerSum;
+            ballSums[i] = ballSum;
         }
-        return "Solve me";
+        return Arrays.equals(containerSums, ballSums) ? "Possible" : "Impossible";
 
     }
 
