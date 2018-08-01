@@ -1,7 +1,5 @@
 package com.gokhanozg.hackerrank.biggerIsGreater;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -13,9 +11,11 @@ public class Solution {
     // Complete the biggerIsGreater function below.
     static String biggerIsGreater(String w) {
 
-        for (int i = w.length() - 1; i > 0; i--) {
-            for (int j = i - 1; j >= 0; j--) {
+        int window = 1;
+        while (window < w.length()) {
+            for (int i = w.length() - 1; i >= window; i--) {
                 char c1 = w.charAt(i);
+                int j = i - window;
                 char c2 = w.charAt(j);
                 if (Character.compare(c1, c2) > 0) {
                     String greater = swap(w, i, j);
@@ -24,7 +24,21 @@ public class Solution {
                     return part1 + sort(part2);
                 }
             }
+            window++;
         }
+
+//        for (int i = w.length() - 1; i > 0; i--) {
+//            for (int j = i - 1; j >= 0; j--) {
+//                char c1 = w.charAt(i);
+//                char c2 = w.charAt(j);
+//                if (Character.compare(c1, c2) > 0) {
+//                    String greater = swap(w, i, j);
+//                    String part1 = greater.substring(0, j + 1);
+//                    String part2 = greater.substring(j + 1);
+//                    return part1 + sort(part2);
+//                }
+//            }
+//        }
 
         return "no answer"; //TODO Fix this/
     }
@@ -63,7 +77,7 @@ public class Solution {
     }
 
     public static void main(String[] args) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+//        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
         int T = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
@@ -72,12 +86,12 @@ public class Solution {
             String w = scanner.nextLine();
 
             String result = biggerIsGreater(w);
-
-            bufferedWriter.write(result);
-            bufferedWriter.newLine();
+            System.out.println(result);
+//            bufferedWriter.write(result);
+//            bufferedWriter.newLine();
         }
 
-        bufferedWriter.close();
+//        bufferedWriter.close();
 
         scanner.close();
     }
