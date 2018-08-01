@@ -6,6 +6,7 @@ package com.gokhanozg.hackerrank.acmICPCTeam;
 public class TestSol {
     public static void main(String[] args) {
         print(Solution.acmTeam(new String[]{"10101", "11100", "11010", "00101"}));
+        print(Solution.acmTeam(new String[]{"10101", "01010", "11100", "00011"}));
     }
 
     static void print(int[] a) {

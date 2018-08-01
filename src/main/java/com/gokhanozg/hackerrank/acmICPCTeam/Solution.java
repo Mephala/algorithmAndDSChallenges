@@ -1,7 +1,6 @@
 package com.gokhanozg.hackerrank.acmICPCTeam;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.Scanner;
 
 public class Solution {
@@ -10,27 +9,36 @@ public class Solution {
 
     // Complete the acmTeam function below.
     static int[] acmTeam(String[] topic) {
+        int max = 0;
+        for (int i = 0; i < topic.length; i++) {
+            for (int j = i + 1; j < topic.length; j++) {
+                String s1 = topic[i];
+                String s2 = topic[j];
+                int count = getCount(s1, s2);
+                max = Math.max(max, count);
+            }
+        }
+        int bestTeams = 0;
+        for (int i = 0; i < topic.length; i++) {
+            for (int j = i + 1; j < topic.length; j++) {
+                String s1 = topic[i];
+                String s2 = topic[j];
+                int count = getCount(s1, s2);
+                if (count == max)
+                    bestTeams++;
+            }
+        }
+        return new int[]{max, bestTeams};
 
-        long max = -1;
-        for (int i = 0; i < topic.length; i++) {
-            for (int j = i + 1; j < topic.length; j++) {
-                String s1 = topic[i];
-                String s2 = topic[j];
-                long val = new BigInteger(s1, 2).longValue() | new BigInteger(s2, 2).longValue();
-                max = Math.max(max, val);
-            }
-        }
+    }
+
+    private static int getCount(String s1, String s2) {
         int count = 0;
-        for (int i = 0; i < topic.length; i++) {
-            for (int j = i + 1; j < topic.length; j++) {
-                String s1 = topic[i];
-                String s2 = topic[j];
-                long val = new BigInteger(s1, 2).longValue() | new BigInteger(s2, 2).longValue();
-                if (val == max)
-                    count++;
-            }
+        for (int k = 0; k < s1.length(); k++) {
+            if (s1.charAt(k) == '1' || s2.charAt(k) == '1')
+                count++;
         }
-        return new int[]{new BigInteger(Long.valueOf(max).toString()).toString(2).replaceAll("0", "").length(), count};
+        return count;
     }
 
     public static void main(String[] args) throws IOException {
