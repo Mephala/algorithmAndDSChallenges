@@ -14,14 +14,20 @@ public class Solution {
         long[] ballSums = new long[containers.length];
         for (int i = 0; i < containers.length; i++) {
             long containerSum = 0L;
-            long ballSum = 0L;
             for (int j = 0; j < containers.length; j++) {
                 containerSum += containers[i][j];
-                ballSum += containers[j][i];
             }
             containerSums[i] = containerSum;
+        }
+        for (int i = 0; i < containers.length; i++) {
+            long ballSum = 0L;
+            for (int j = 0; j < containers.length; j++) {
+                ballSum += containers[j][i];
+            }
             ballSums[i] = ballSum;
         }
+        Arrays.sort(containerSums);
+        Arrays.sort(ballSums);
         return Arrays.equals(containerSums, ballSums) ? "Possible" : "Impossible";
 
     }
