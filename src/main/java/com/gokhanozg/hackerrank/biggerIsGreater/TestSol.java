@@ -19,11 +19,12 @@ public class TestSol {
 //        System.out.println(Solution.biggerIsGreater("dkhc"));
 //        System.out.println(Solution.biggerIsGreater("z"));
 //        System.out.println(Solution.biggerIsGreater("abdef"));
-        System.out.println(Solution.biggerIsGreater("rebjvsszebhehuojrkkhszxltyqfdvayusylgmgkdivzlpmmtvbsavxvydldmsym"));
-        System.out.println("rebjvsszebhehuojrkkhszxltyqfdvayusylgmgkdivzlpmmtvbsavxvydldmyms");
-        System.out.println("dldmsym");
-        System.out.println("dldmyms");
-        System.out.println(Solution.biggerIsGreater("dldmsym"));
+        System.out.println("biehzcmjckznhwrfgglverxsezxuqpj");
+        System.out.println(Solution.biggerIsGreater("biehzcmjckznhwrfgglverxsezxuqpj"));
+        System.out.println("biehzcmjckznhwrfgglverxsjepquxz");
+//        System.out.println("dldmsym");
+//        System.out.println("dldmyms");
+//        System.out.println(Solution.biggerIsGreater("dldmsym"));
         if (debug) {
             try {
                 URL url = TestSol.class.getClassLoader().getResource("biggerIsGreater/query.txt");
@@ -43,6 +44,7 @@ public class TestSol {
                         break;
                     }
                 }
+                System.out.println("Huge Success");
             } catch (Throwable t) {
                 t.printStackTrace();
             }

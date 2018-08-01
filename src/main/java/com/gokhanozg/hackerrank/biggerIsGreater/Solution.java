@@ -1,8 +1,7 @@
 package com.gokhanozg.hackerrank.biggerIsGreater;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Solution {
 
@@ -14,46 +13,25 @@ public class Solution {
             return "no answer";
 
         for (int i = w.length() - 2; i >= 0; i--) {
+            List<Character> higherChars = new ArrayList<>();
+            Map<Character, Integer> higherCharIndex = new HashMap<>();
             for (int j = i + 1; j < w.length(); j++) {
                 char c1 = w.charAt(j);
                 char c2 = w.charAt(i);
                 if (c1 > c2) {
-                    String greater = swap(w, i, j);
-                    String part1 = greater.substring(0, j + 1);
-                    String part2 = greater.substring(j + 1);
-                    return part1 + sort(part2);
+                    higherChars.add(c1);
+                    higherCharIndex.put(c1, j);
                 }
             }
-        }
-
-        int window = 1;
-        while (window < w.length()) {
-            for (int i = w.length() - 1; i >= window; i--) {
-                char c1 = w.charAt(i);
-                int j = i - window;
-                char c2 = w.charAt(j);
-                if (Character.compare(c1, c2) > 0) {
-                    String greater = swap(w, i, j);
-                    String part1 = greater.substring(0, j + 1);
-                    String part2 = greater.substring(j + 1);
-                    return part1 + sort(part2);
-                }
+            if (higherChars.size() > 0) {
+                Collections.sort(higherChars);
+                int j = higherCharIndex.get(higherChars.get(0));
+                String greater = swap(w, i, j);
+                String part1 = greater.substring(0, i + 1);
+                String part2 = greater.substring(i + 1);
+                return part1 + sort(part2);
             }
-            window++;
         }
-
-//        for (int i = w.length() - 1; i > 0; i--) {
-//            for (int j = i - 1; j >= 0; j--) {
-//                char c1 = w.charAt(i);
-//                char c2 = w.charAt(j);
-//                if (Character.compare(c1, c2) > 0) {
-//                    String greater = swap(w, i, j);
-//                    String part1 = greater.substring(0, j + 1);
-//                    String part2 = greater.substring(j + 1);
-//                    return part1 + sort(part2);
-//                }
-//            }
-//        }
 
         return "no answer"; //TODO Fix this/
     }
