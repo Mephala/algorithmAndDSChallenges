@@ -5,10 +5,13 @@ package com.gokhanozg.hackerrank.biggerIsGreater;
  */
 public class TestSol {
     public static void main(String[] args) {
-//        System.out.println(Solution.biggerIsGreater("ab"));
-//        System.out.println(Solution.biggerIsGreater("bb"));
-//        System.out.println(Solution.biggerIsGreater("hefg"));
-//        System.out.println(Solution.biggerIsGreater("dhck"));
+        System.out.println(Solution.biggerIsGreater("ab"));
+        System.out.println(Solution.biggerIsGreater("bb"));
+        System.out.println(Solution.biggerIsGreater("hefg"));
+        System.out.println(Solution.biggerIsGreater("dhck"));
         System.out.println(Solution.biggerIsGreater("dkhc"));
+        System.out.println(Solution.biggerIsGreater("z"));
+        System.out.println(Solution.biggerIsGreater("abdef"));
+        System.out.println(Solution.biggerIsGreater("gokhan"));
     }
 }

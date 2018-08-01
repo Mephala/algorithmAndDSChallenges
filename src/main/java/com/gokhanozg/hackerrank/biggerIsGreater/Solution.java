@@ -3,6 +3,7 @@ package com.gokhanozg.hackerrank.biggerIsGreater;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Solution {
@@ -11,17 +12,38 @@ public class Solution {
 
     // Complete the biggerIsGreater function below.
     static String biggerIsGreater(String w) {
-        int swapLen = 1;
-        while (swapLen < w.length()) {
-            for (int i = w.length() - 1; i >= swapLen; i--) {
+
+        for (int i = w.length() - 1; i > 0; i--) {
+            for (int j = i - 1; j >= 0; j--) {
                 char c1 = w.charAt(i);
-                char c2 = w.charAt(i - swapLen);
-                if (Character.compare(c1, c2) > 0)
-                    return swap(w, i, i - swapLen);
+                char c2 = w.charAt(j);
+                if (Character.compare(c1, c2) > 0) {
+                    String greater = swap(w, i, j);
+                    String part1 = greater.substring(0, j + 1);
+                    String part2 = greater.substring(j + 1);
+                    return part1 + sort(part2);
+                }
             }
-            swapLen++;
         }
+
         return "no answer"; //TODO Fix this/
+    }
+
+    private static String sort(String s) {
+        if (s == null || s.length() == 0)
+            return "";
+        if (s.length() == 1)
+            return s;
+        char[] chars = new char[s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            chars[i] = s.charAt(i);
+        }
+        Arrays.sort(chars);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < chars.length; i++) {
+            sb.append(chars[i]);
+        }
+        return sb.toString();
     }
 
     private static String swap(String w, int i, int j) {
