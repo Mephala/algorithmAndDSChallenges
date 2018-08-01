@@ -10,6 +10,21 @@ public class Solution {
 
     // Complete the biggerIsGreater function below.
     static String biggerIsGreater(String w) {
+        if (w.length() == 1)
+            return "no answer";
+
+        for (int i = w.length() - 2; i >= 0; i--) {
+            for (int j = i + 1; j < w.length(); j++) {
+                char c1 = w.charAt(j);
+                char c2 = w.charAt(i);
+                if (c1 > c2) {
+                    String greater = swap(w, i, j);
+                    String part1 = greater.substring(0, j + 1);
+                    String part2 = greater.substring(j + 1);
+                    return part1 + sort(part2);
+                }
+            }
+        }
 
         int window = 1;
         while (window < w.length()) {
