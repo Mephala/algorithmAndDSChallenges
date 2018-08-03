@@ -11,8 +11,32 @@ public class Solution {
 
     // Complete the workbook function below.
     static int workbook(int n, int k, int[] arr) {
-
-        return 5;
+        int page = 0;
+        int specialCount = 0;
+        for (int i = 0; i < arr.length; i++) {
+            int problems = arr[i];
+            page++; // each chapter is a new page
+            int chapterPage = problems / k;
+            int additionalProblems = problems % k;
+            for (int j = 0; j < chapterPage; j++) {
+                int startP = (j * k) + 1;
+                int endP = startP + k - 1;
+                if (page >= startP && page <= endP) {
+                    specialCount++;
+                }
+                page++;
+            }
+            page--;
+            if (additionalProblems > 0) {
+                page++;
+                int startP = (chapterPage * k) + 1;
+                int endP = startP + additionalProblems - 1;
+                if (page >= startP && page <= endP) {
+                    specialCount++;
+                }
+            }
+        }
+        return specialCount;
     }
 
     public static void main(String[] args) throws IOException {
