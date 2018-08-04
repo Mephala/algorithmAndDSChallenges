@@ -3,6 +3,8 @@ package com.gokhanozg.hackerrank.gridSearch;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Solution {
@@ -17,19 +19,24 @@ public class Solution {
         //FIXME add multiple checks for repetitive occurences
         for (int i = 0; i <= searchEnd; i++) {
             String sline = G[i];
-            int sindex = sline.indexOf(start);
-            if (sindex != -1) {
-                boolean matches = true;
+            List<Integer> sindexList = new ArrayList<>();
+            int end = sline.length() - start.length();
+            for (int j = 0; j <= end; j++) {
+                String part = sline.substring(j, j + start.length());
+                if (part.equals(start))
+                    sindexList.add(j);
+            }
+            for (Integer sIndex : sindexList) {
+                boolean match = true;
                 for (int j = 1; j < P.length; j++) {
                     String Gline = G[i + j];
                     String Pline = P[j];
-                    int index = Gline.indexOf(Pline);
-                    if (sindex != index) {
-                        matches = false;
+                    if (!Gline.substring(sIndex, sIndex + start.length()).equals(Pline)) {
+                        match = false;
                         break;
                     }
                 }
-                if (matches) {
+                if (match) {
                     return "YES";
                 }
             }
