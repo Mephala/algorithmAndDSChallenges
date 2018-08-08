@@ -11,6 +11,8 @@ public class TestSol {
         printStrArr(Solution.bomberMan(2, new String[]{".......", "...O...", "....O..", ".......", "OO.....", "OO....."}));
         printStrArr(Solution.bomberMan(4, new String[]{".......", "...O...", "....O..", ".......", "OO.....", "OO....."}));
         printStrArr(Solution.bomberMan(5, new String[]{".......", "...O...", "....O..", ".......", "OO.....", "OO....."}));
+
+        // Test on case 15!
     }
 
     static void printStrArr(String[] arr) {
