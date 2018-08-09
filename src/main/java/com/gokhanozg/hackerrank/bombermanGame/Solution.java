@@ -24,15 +24,16 @@ public class Solution {
         } else if (n == 2) {
             return stringifyMatrix(fullMatrix); // filled with bombs.
         } else {
+            bombMatrix = detonate(bombMatrix);
+            int[][] det = bombMatrix;
+            int[][] init = detonate(bombMatrix);
             n -= 3;
             if (n % 2 == 1) {
                 return stringifyMatrix(fullMatrix);
             } else if (n % 4 == 2) {
-                return stringifyMatrix(bombMatrix);
+                return stringifyMatrix(init);
             } else {
-
-                int[][] detonateMatrix = detonate(bombMatrix);
-                return stringifyMatrix(detonateMatrix);
+                return stringifyMatrix(det);
             }
         }
     }
