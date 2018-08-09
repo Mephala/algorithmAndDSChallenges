@@ -86,35 +86,31 @@ public class Solution {
                 return 0; //second largest plus has 0 area.
             }
         }
-        return 3;
-
-
-    }
-
-    public static void main(String[] args) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
-
-        String[] nm = scanner.nextLine().split(" ");
-
-        int n = Integer.parseInt(nm[0]);
-
-        int m = Integer.parseInt(nm[1]);
-
-        String[] grid = new String[n];
-
-        for (int i = 0; i < n; i++) {
-            String gridItem = scanner.nextLine();
-            grid[i] = gridItem;
+        maxPlusLen = 1;
+        maxPlusCentre = plusCenters.get(0);
+        for (Point plusCenter : plusCenters) {
+            int maxLen = m.length / 2;
+            int pointLen = 1;
+            for (int i = 2; i <= maxLen; i++) {
+                int centeri = plusCenter.i;
+                int centerj = plusCenter.j;
+                int left = centerj - i >= 0 && m[centeri][centerj - i] == 1 && !largestPlus.containsPoint(centeri, centerj - i) ? 1 : 0;
+                int right = centerj + i < m[0].length && m[centeri][centerj + i] == 1 && !largestPlus.containsPoint(centeri, centerj + i) ? 1 : 0;
+                int up = centeri - i >= 0 && m[centeri - i][centerj] == 1 && !largestPlus.containsPoint(centeri - i, centerj) ? 1 : 0;
+                int bottom = centeri + i < m.length && m[centeri + i][centerj] == 1 && !largestPlus.containsPoint(centeri + i, centerj) ? 1 : 0;
+                if (left == 1 && right == 1 && up == 1 && bottom == 1) {
+                    pointLen = i;
+                } else {
+                    break;
+                }
+            }
+            if (pointLen > maxPlusLen) {
+                maxPlusCentre = plusCenter;
+                maxPlusLen = pointLen;
+            }
         }
-
-        int result = twoPluses(grid);
-
-        bufferedWriter.write(String.valueOf(result));
-        bufferedWriter.newLine();
-
-        bufferedWriter.close();
-
-        scanner.close();
+        Plus secondLargestPlus = new Plus(maxPlusLen, maxPlusCentre.i, maxPlusCentre.j);
+        return largestPlus.size() * secondLargestPlus.size();
     }
 
     static class Plus {
@@ -189,4 +185,32 @@ public class Solution {
                     '}';
         }
     }
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] nm = scanner.nextLine().split(" ");
+
+        int n = Integer.parseInt(nm[0]);
+
+        int m = Integer.parseInt(nm[1]);
+
+        String[] grid = new String[n];
+
+        for (int i = 0; i < n; i++) {
+            String gridItem = scanner.nextLine();
+            grid[i] = gridItem;
+        }
+
+        int result = twoPluses(grid);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+
+
 }
