@@ -86,11 +86,11 @@ public class Solution {
                 return 0; //second largest plus has 0 area.
             }
         }
-        maxPlusLen = 1;
-        maxPlusCentre = plusCenters.get(0);
+        maxPlusLen = 0;
+        maxPlusCentre = null;
         for (Point plusCenter : plusCenters) {
             int maxLen = m.length / 2;
-            int pointLen = 1;
+            int pointLen = 0;
             for (int i = 2; i <= maxLen; i++) {
                 int centeri = plusCenter.i;
                 int centerj = plusCenter.j;
@@ -108,6 +108,9 @@ public class Solution {
                 maxPlusCentre = plusCenter;
                 maxPlusLen = pointLen;
             }
+        }
+        if (maxPlusCentre == null) {
+            return largestPlus.size();
         }
         Plus secondLargestPlus = new Plus(maxPlusLen, maxPlusCentre.i, maxPlusCentre.j);
         return largestPlus.size() * secondLargestPlus.size();
