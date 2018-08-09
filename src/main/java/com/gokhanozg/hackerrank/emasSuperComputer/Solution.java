@@ -86,11 +86,34 @@ public class Solution {
                 return 0; //second largest plus has 0 area.
             }
         }
-        maxPlusLen = 0;
-        maxPlusCentre = null;
+        //removing other plus centers if they overlap with largest plus.
+        Iterator<Point> plusIterator = plusCenters.iterator();
+        while (plusIterator.hasNext()) {
+            Point next = plusIterator.next();
+            Plus plus = new Plus(1, next.i, next.j);
+            if (largestPlus.overlap(plus))
+                plusIterator.remove();
+        }
+        if (plusCenters.size() == 0) {
+            //we have one big plus only. checking single good points.
+            Iterator<Point> pointIterator = goodPoints.iterator();
+            while (pointIterator.hasNext()) {
+                Point next = pointIterator.next();
+                if (largestPlus.containsPoint(next)) {
+                    pointIterator.remove();
+                }
+            }
+            if (goodPoints.size() > 0) {
+                return largestPlus.size();
+            } else {
+                return 0; //second largest plus has 0 area.
+            }
+        }
+        maxPlusLen = 1;
+        maxPlusCentre = plusCenters.get(0);
         for (Point plusCenter : plusCenters) {
             int maxLen = m.length / 2;
-            int pointLen = 0;
+            int pointLen = 1;
             for (int i = 2; i <= maxLen; i++) {
                 int centeri = plusCenter.i;
                 int centerj = plusCenter.j;
@@ -153,6 +176,17 @@ public class Solution {
 
         int size() {
             return (len * 4) + 1;
+        }
+
+        boolean overlap(Plus plus) {
+            Set<Point> points = plus.pointSet;
+            for (Point point : points) {
+                if (containsPoint(point)) {
+                    return true;
+                }
+
+            }
+            return false;
         }
     }
 
