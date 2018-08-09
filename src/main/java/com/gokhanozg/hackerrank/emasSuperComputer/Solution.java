@@ -46,11 +46,11 @@ public class Solution {
         if (plusCenters.size() == 0 && goodCount < 2) {
             return 0; // we don't have 2 good points, returning 0.
         }
-        int maxPlusLen = 1;
-        Point maxPlusCentre = plusCenters.get(0);
+        List<Plus> plusList = new ArrayList<>();
         for (Point plusCenter : plusCenters) {
             int maxLen = m.length / 2;
             int pointLen = 1;
+            plusList.add(new Plus(pointLen, plusCenter.i, plusCenter.j));
             for (int i = 2; i <= maxLen; i++) {
                 int centeri = plusCenter.i;
                 int centerj = plusCenter.j;
@@ -60,83 +60,57 @@ public class Solution {
                 int bottom = centeri + i < m.length && m[centeri + i][centerj] == 1 ? 1 : 0;
                 if (left == 1 && right == 1 && up == 1 && bottom == 1) {
                     pointLen = i;
+                    plusList.add(new Plus(pointLen, plusCenter.i, plusCenter.j));
                 } else {
                     break;
                 }
             }
-            if (pointLen > maxPlusLen) {
-                maxPlusCentre = plusCenter;
-                maxPlusLen = pointLen;
-            }
+
         }
-        Plus largestPlus = new Plus(maxPlusLen, maxPlusCentre.i, maxPlusCentre.j);
-        plusCenters.remove(maxPlusCentre);
-        if (plusCenters.size() == 0) {
-            //we have one big plus only. checking single good points.
-            Iterator<Point> pointIterator = goodPoints.iterator();
-            while (pointIterator.hasNext()) {
-                Point next = pointIterator.next();
-                if (largestPlus.containsPoint(next)) {
-                    pointIterator.remove();
+        if (plusList.size() == 1) {
+            Plus p = plusList.get(0);
+            int totalSizeWithGoodPoints = getTotalSizeWithGoodPoints(goodPoints, p);
+            return totalSizeWithGoodPoints;
+        } else {
+            int max = Integer.MIN_VALUE;
+            for (Plus plus1 : plusList) {
+                List<Plus> nonOverlappingPlusses = new ArrayList<>();
+                for (Plus plus2 : plusList) {
+                    if (!plus1.overlap(plus2)) {
+                        nonOverlappingPlusses.add(plus2);
+                    }
                 }
-            }
-            if (goodPoints.size() > 0) {
-                return largestPlus.size();
-            } else {
-                return 0; //second largest plus has 0 area.
-            }
-        }
-        //removing other plus centers if they overlap with largest plus.
-        Iterator<Point> plusIterator = plusCenters.iterator();
-        while (plusIterator.hasNext()) {
-            Point next = plusIterator.next();
-            Plus plus = new Plus(1, next.i, next.j);
-            if (largestPlus.overlap(plus))
-                plusIterator.remove();
-        }
-        if (plusCenters.size() == 0) {
-            //we have one big plus only. checking single good points.
-            Iterator<Point> pointIterator = goodPoints.iterator();
-            while (pointIterator.hasNext()) {
-                Point next = pointIterator.next();
-                if (largestPlus.containsPoint(next)) {
-                    pointIterator.remove();
-                }
-            }
-            if (goodPoints.size() > 0) {
-                return largestPlus.size();
-            } else {
-                return 0; //second largest plus has 0 area.
-            }
-        }
-        maxPlusLen = 1;
-        maxPlusCentre = plusCenters.get(0);
-        for (Point plusCenter : plusCenters) {
-            int maxLen = m.length / 2;
-            int pointLen = 1;
-            for (int i = 2; i <= maxLen; i++) {
-                int centeri = plusCenter.i;
-                int centerj = plusCenter.j;
-                int left = centerj - i >= 0 && m[centeri][centerj - i] == 1 && !largestPlus.containsPoint(centeri, centerj - i) ? 1 : 0;
-                int right = centerj + i < m[0].length && m[centeri][centerj + i] == 1 && !largestPlus.containsPoint(centeri, centerj + i) ? 1 : 0;
-                int up = centeri - i >= 0 && m[centeri - i][centerj] == 1 && !largestPlus.containsPoint(centeri - i, centerj) ? 1 : 0;
-                int bottom = centeri + i < m.length && m[centeri + i][centerj] == 1 && !largestPlus.containsPoint(centeri + i, centerj) ? 1 : 0;
-                if (left == 1 && right == 1 && up == 1 && bottom == 1) {
-                    pointLen = i;
+                if (nonOverlappingPlusses.size() == 0) {
+                    max = Math.max(max, getTotalSizeWithGoodPoints(goodPoints, plus1));
                 } else {
-                    break;
+                    int localMax = Integer.MIN_VALUE;
+                    int plus1Size = plus1.size();
+                    for (Plus nonOverlappingPlus : nonOverlappingPlusses) {
+                        int plus2Size = nonOverlappingPlus.size();
+                        int product = plus2Size * plus1Size;
+                        localMax = Math.max(localMax, product);
+                    }
+                    max = Math.max(max, localMax);
                 }
             }
-            if (pointLen > maxPlusLen) {
-                maxPlusCentre = plusCenter;
-                maxPlusLen = pointLen;
+            return max;
+        }
+    }
+
+    private static int getTotalSizeWithGoodPoints(List<Point> goodPoints, Plus p) {
+        int totalSizeWithGoodPoints;
+        int val = 0;
+        for (Point goodPoint : goodPoints) {
+            if (!p.containsPoint(goodPoint)) {
+                val++;
             }
         }
-        if (maxPlusCentre == null) {
-            return largestPlus.size();
+        if (val >= 1) {
+            totalSizeWithGoodPoints = p.size();
+        } else {
+            totalSizeWithGoodPoints = 0;
         }
-        Plus secondLargestPlus = new Plus(maxPlusLen, maxPlusCentre.i, maxPlusCentre.j);
-        return largestPlus.size() * secondLargestPlus.size();
+        return totalSizeWithGoodPoints;
     }
 
     static class Plus {
