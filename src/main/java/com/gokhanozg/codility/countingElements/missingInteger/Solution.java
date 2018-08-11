@@ -10,7 +10,7 @@ class Solution {
         for (int i : A) {
             values.add(i);
         }
-        for (int i = 1; i <= 100000; i++) {
+        for (int i = 1; i <= 1000001; i++) {
             if (!values.contains(i))
                 return i;
         }
