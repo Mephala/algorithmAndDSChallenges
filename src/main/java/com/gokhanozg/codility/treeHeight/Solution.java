@@ -9,7 +9,7 @@ class Tree {
 class Solution {
     public int solution(Tree T) {
         // write your code in Java SE 8
-        return calcH(T);
+        return calcH(T) - 1;
     }
 
     private int calcH(Tree t) {
