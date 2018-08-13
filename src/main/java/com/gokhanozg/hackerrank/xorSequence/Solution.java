@@ -12,16 +12,10 @@ public class Solution {
 
     // Complete the xorSequence function below.
     static long xorSequence(long l, long r) {
-        long prevZeroIndex = prevZeroIndex(r);
-        if (prevZeroIndex > l) {
-            l = prevZeroIndex;
-        }
 
 
         long prev = 0L;
-
-
-        long index = 1L;
+        long index = prevZeroIndex(l);
         while (index <= l) {
             prev = prev ^ index;
             index++;

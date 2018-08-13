@@ -6,9 +6,9 @@ package com.gokhanozg.hackerrank.xorSequence;
 public class TestSol {
 
     public static void main(String[] args) {
-        System.out.println(Solution.xorSequence(2, 4));
-        System.out.println(Solution.xorSequence(2, 8));
+//        System.out.println(Solution.xorSequence(2, 4));
+//        System.out.println(Solution.xorSequence(2, 8));
         System.out.println(Solution.xorSequence(5, 9));
-        System.out.println(Solution.xorSequence(1, (long) 10E10));
+//        System.out.println(Solution.xorSequence(1, (long) 10E10));
     }
 }
