@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Solution {
@@ -12,32 +14,74 @@ public class Solution {
 
     // Complete the xorSequence function below.
     static long xorSequence(long l, long r) {
-
-
-        long prev = 0L;
-        long index = prevZeroIndex(l);
-        while (index <= l) {
-            prev = prev ^ index;
-            index++;
+        long r1 = seqSum(r);
+        long ret = 0L;
+        List<Long> seqs = new ArrayList<>();
+        for (long i = l; i <= r; i++) {
+            ret ^= xorSeq(i);
+            seqs.add(ret);
         }
-        long start = prev;
-        while (index <= r) {
-            prev = prev ^ index;
-            start ^= prev;
-            index++;
-        }
-        return start;
-
+        return r1;
     }
 
-    static long prevZeroIndex(long n) {
-        if ((n & (n - 1)) == 0) {
-            return n - 1;
+    static long xorSeq(long n) {
+        if (n == 0) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
+        } else if (n == 2) {
+            return 3;
         } else {
-            double log = Math.pow(n, 0.5d);
-            return (long) (Math.pow(2, new BigDecimal(log).setScale(0, BigDecimal.ROUND_DOWN).doubleValue()) - 1);
+            int m = (int) (n % 4);
+            if (m == 3) {
+                return 0;
+            } else if (m == 2) {
+                return n + 1;
+            } else if (m == 1) {
+                return 1;
+            } else {
+                return n;
+            }
         }
     }
+
+    static long seqSum(long r) {
+        long v = r + 1;
+        if (v == 0) {
+            return 0;
+        } else if (v == 1) {
+            return 1;
+        } else if (v == 2) {
+            return 2;
+        } else if (v == 3) {
+            return 2;
+        } else if (v == 4) {
+            return 6;
+        } else if (v == 5) {
+            return 7;
+        } else {
+            int m = (int) (v % 8);
+            if (m == 6) {
+                return 0;
+            } else if (m == 7) {
+                return 0;
+            } else if (m == 0) {
+                return v;
+            } else if (m == 1) {
+                return v;
+            } else if (m == 2) {
+                return 2;
+            } else if (m == 3) {
+                return 2;
+            } else if (m == 4) {
+                return v + 2;
+            } else {
+                return v + 2;
+            }
+        }
+    }
+
+
 
     public static void main(String[] args) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
