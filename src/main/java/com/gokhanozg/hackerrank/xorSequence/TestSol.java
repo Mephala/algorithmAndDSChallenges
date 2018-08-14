@@ -1,22 +1,20 @@
 package com.gokhanozg.hackerrank.xorSequence;
 
-import java.math.BigInteger;
-
 /**
  * Created by Gokhan Ozgozen on 13-Aug-18.
  */
 public class TestSol {
 
     public static void main(String[] args) {
-//        System.out.println(Solution.xorSequence(1, (long) 10E10));
-//        System.out.println(Solution.xorSequence(2, 4));
-//        System.out.println(Solution.xorSequence(2, 8));
+        System.out.println(Solution.xorSequence(1, (long) 10E10));
+        System.out.println(Solution.xorSequence(2, 4));
+        System.out.println(Solution.xorSequence(2, 8));
         System.out.println(Solution.xorSequence(5, 9));
         System.out.println(Solution.xorSequence(5, 15));
         System.out.println(Solution.xorSequence(5, 25));
-//        System.out.println(Solution.xorSequence(3, 8));
-//        System.out.println(Solution.xorSequence(8, 28));
-//        System.out.println(Solution.xorSequence(8, 10));
+        System.out.println(Solution.xorSequence(3, 8));
+        System.out.println(Solution.xorSequence(8, 28));
+        System.out.println(Solution.xorSequence(8, 10));
 //        final int start = 2;
 //        long s = (long) (Math.pow(2,start)+1);
 //        long e = (long) (Math.pow(2,start+1)-1);

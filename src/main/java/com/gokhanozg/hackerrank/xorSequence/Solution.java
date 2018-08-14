@@ -3,9 +3,6 @@ package com.gokhanozg.hackerrank.xorSequence;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Solution {
@@ -14,39 +11,10 @@ public class Solution {
 
     // Complete the xorSequence function below.
     static long xorSequence(long l, long r) {
-        long r1 = seqSum(r);
-        long ret = 0L;
-        List<Long> seqs = new ArrayList<>();
-        for (long i = l; i <= r; i++) {
-            ret ^= xorSeq(i);
-            seqs.add(ret);
-        }
-        return r1;
+        return seqSum(l - 1) ^ seqSum(r);
     }
 
-    static long xorSeq(long n) {
-        if (n == 0) {
-            return 0;
-        } else if (n == 1) {
-            return 1;
-        } else if (n == 2) {
-            return 3;
-        } else {
-            int m = (int) (n % 4);
-            if (m == 3) {
-                return 0;
-            } else if (m == 2) {
-                return n + 1;
-            } else if (m == 1) {
-                return 1;
-            } else {
-                return n;
-            }
-        }
-    }
-
-    static long seqSum(long r) {
-        long v = r + 1;
+    static long seqSum(long v) {
         if (v == 0) {
             return 0;
         } else if (v == 1) {
