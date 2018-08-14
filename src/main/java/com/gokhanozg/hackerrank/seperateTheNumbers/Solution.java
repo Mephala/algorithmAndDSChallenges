@@ -21,26 +21,26 @@ public class Solution {
     }
 
     private static boolean checkBeautity(String s, int slen) {
-        if (slen >= s.length()) {
+        if (slen > s.length()) {
             return false;
         }
         int val = Integer.parseInt(s.substring(0, slen));
         val++;
         int sindex = slen;
-        if (sindex >= s.length()) {
+        int next = sindex + ("" + val).length();
+        if (next > s.length()) {
             return false;
         }
-        int next = sindex + ("" + val).length();
         while (s.substring(sindex, next).equals(Integer.valueOf(val).toString())) {
             val++;
-            sindex += ("" + val).length();
+            sindex = next;
             next = sindex + ("" + val).length();
-            if (sindex == s.length() - 1) {
+            if (sindex == s.length()) {
                 return true;
-            } else if (sindex >= s.length()) {
+            } else if (sindex > s.length()) {
                 return false;
             }
-            if (next >= s.length()) {
+            if (next > s.length()) {
                 return false;
             }
         }
