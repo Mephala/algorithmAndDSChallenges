@@ -7,7 +7,10 @@ public class TestSol {
 
 
     public static void main(String[] args) {
-        printA(new int[]{9, 1, 4, 9, 0, 4, 8, 9, 0, 1});
+//        printA(new Solution().solution(new int[]{9, 1, 4, 9, 0, 4, 8, 9, 0, 1}));
+//        printA(new Solution().solution(new int[]{0, 0, 0, 0, 0, 4, 3, 1, 2}));
+//        printA(new Solution().solution(new int[]{0}));
+        printA(new Solution().solution(new int[]{0, 0}));
     }
 
     private static void printA(int[] a) {

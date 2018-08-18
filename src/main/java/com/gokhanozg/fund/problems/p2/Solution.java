@@ -32,8 +32,8 @@ class Solution {
             }
         }
         Map<Integer, List<Integer>> distanceNodes = new HashMap<>();
-        distanceNodes.put(1, capital.otherConnect);
-        for (int i = 2; i < T.length - 1; i++) {
+        distanceNodes.put(0, capital.otherConnect);
+        for (int i = 1; i < T.length - 1; i++) {
             List<Node> nodes = new ArrayList<>();
             List<Integer> connectedCities = new ArrayList<>();
             connectedCities = distanceNodes.get(i - 1);
@@ -48,8 +48,7 @@ class Solution {
             distanceNodes.put(i, furtherCities);
         }
         int[] r = new int[T.length - 1];
-        r[0] = 1;
-        for (int i = 1; i < r.length; i++) {
+        for (int i = 0; i < r.length; i++) {
             r[i] = distanceNodes.get(i).size();
         }
         return r;
@@ -80,6 +79,13 @@ class Solution {
         @Override
         public int hashCode() {
             return Objects.hash(city, connects, otherConnect);
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "city=" + city +
+                    '}';
         }
     }
 }
