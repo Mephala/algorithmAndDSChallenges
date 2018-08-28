@@ -11,6 +11,7 @@ import java.util.Set;
 public class Test {
 
     public static void main(String[] args) {
+        //test
 //        System.out.println(findLongestTile("6-3"));
 //        System.out.println(findLongestTile("1-1,3-5,5-2,2-3,2-4"));
 //        System.out.println(findLongestTile("1-1,3-5,5-2,2-3,2-4,6-2,6-8,1-4,4-3,3-5,5-2,5-1"));
