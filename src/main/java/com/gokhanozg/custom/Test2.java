@@ -30,7 +30,8 @@ public class Test2 {
 
         @Override
         public boolean equals(Object o) {
-            return true;
+            T t = (T) o;
+            return id == t.id;
         }
 
         @Override
