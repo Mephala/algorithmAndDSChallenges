@@ -2,6 +2,8 @@ package com.gokhanozg.custom;
 
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by Gokhan Ozgozen on 16-Nov-18.
@@ -21,6 +23,7 @@ public class FiboTest {
         dif = System.nanoTime() - start;
         System.out.println("ForkJoin calc:" + dif);
 
+        System.out.println(Stream.of("ast", "asdadw").filter(s -> s.equals("ast")).collect(Collectors.toList()));
     }
 
     private static int calcFiboRecursively(int val) {
