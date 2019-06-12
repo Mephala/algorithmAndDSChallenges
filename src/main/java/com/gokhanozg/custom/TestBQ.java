@@ -8,7 +8,7 @@ import java.util.UUID;
 public class TestBQ {
 
     public static void main(String[] args) throws InterruptedException {
-        final int lim = 20;
+        final int lim = 6000;
         BQ bq = new BQ();
         Thread pt1 = new Thread(new Runnable() {
             @Override

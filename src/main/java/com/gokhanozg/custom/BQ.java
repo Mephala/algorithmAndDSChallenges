@@ -8,7 +8,7 @@ import java.util.Queue;
  */
 public class BQ {
 
-    private final int limit = 10;
+    private final int limit = 3;
     private Queue<String> queue = new LinkedList<>();
 
     protected synchronized int getSize() {
