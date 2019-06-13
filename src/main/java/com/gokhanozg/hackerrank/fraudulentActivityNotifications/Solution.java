@@ -1,7 +1,9 @@
 package com.gokhanozg.hackerrank.fraudulentActivityNotifications;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Solution {
@@ -13,88 +15,81 @@ public class Solution {
         if (expenditure.length <= d) {
             return 0;
         }
-        int[] sortedInitialExpenditure = new int[d];
-        System.arraycopy(expenditure, 0, sortedInitialExpenditure, 0, d);
-        Arrays.sort(sortedInitialExpenditure);
+        List<Integer> observedPayments = new ArrayList<>();
+        for (int i = 0; i < d; i++) {
+            observedPayments.add(expenditure[i]);
+        }
+        Collections.sort(observedPayments);
 
-        int[] currentExpenditureRecords = sortedInitialExpenditure;
+        int m1 = observedPayments.get(observedPayments.size() / 2);
+        int m2 = observedPayments.size() % 2 == 1 ? m1 : observedPayments.get(observedPayments.size() / 2 - 1);
 
         int count = 0;
         for (int i = d; i < expenditure.length; i++) {
-            float next = expenditure[i];
-            float median = calcMedian(currentExpenditureRecords);
-            if (next >= (median * 2)) {
+            Integer next = expenditure[i];
+            float median = (m1 + m2) / 2f;
+            if (next >= median * 2) {
                 count++;
             }
-            addTrailingRecord(currentExpenditureRecords, expenditure[i]);
+
+            if (i == expenditure.length - 1) {
+                continue;
+            }
+
+            observedPayments.remove(Integer.valueOf(expenditure[i - d]));
+
+            int begin = 0;
+            int end = observedPayments.size() - 1;
+            int insertIndex = -1;
+
+            while (begin <= end) {
+                int mid = (begin + end) / 2;
+
+                int midVal = observedPayments.get(mid);
+
+                if (midVal == next) {
+                    insertIndex = mid;
+                    break;
+                } else if (midVal < next) {
+                    if (mid == observedPayments.size() - 1) {
+                        insertIndex = -2; // add tail
+                        break;
+                    } else if (observedPayments.get(mid + 1) > next) {
+                        insertIndex = mid + 1;
+                        break;
+                    } else {
+                        begin = mid + 1;
+                    }
+                } else {
+                    if (mid == 0) {
+                        insertIndex = 0; // insert head
+                        break;
+                    } else if (observedPayments.get(mid - 1) < next) {
+                        insertIndex = mid - 1;
+                        break;
+                    } else {
+                        end = mid - 1;
+                    }
+                }
+
+            }
+
+            if (insertIndex == -1) {
+                throw new IllegalStateException("Should never happen!");
+            } else if (insertIndex == -2) {
+                observedPayments.add(next);
+            } else {
+                observedPayments.add(insertIndex, next);
+            }
+
+            m1 = observedPayments.get(observedPayments.size() / 2);
+            m2 = observedPayments.size() % 2 == 1 ? m1 : observedPayments.get(observedPayments.size() / 2 - 1);
+
         }
 
         return count;
     }
 
-    private static void addTrailingRecord(int[] currentExpenditureRecords, int i) {
-        if (currentExpenditureRecords.length == 1) {
-            currentExpenditureRecords[0] = i;
-        } else {
-            int[] firstRemovedArray = new int[currentExpenditureRecords.length - 1];
-            System.arraycopy(currentExpenditureRecords, 1, firstRemovedArray, 0, firstRemovedArray.length);
-
-            int insertIndex = calculateInsertIndex(firstRemovedArray, i);
-
-            if (insertIndex == 0) {
-                currentExpenditureRecords[0] = i;
-            } else if (insertIndex == currentExpenditureRecords.length - 1) {
-                int[] tmp = new int[currentExpenditureRecords.length];
-                System.arraycopy(currentExpenditureRecords, 1, tmp, 0, currentExpenditureRecords.length - 1);
-                tmp[currentExpenditureRecords.length - 1] = i;
-                System.arraycopy(tmp, 0, currentExpenditureRecords, 0, tmp.length);
-            } else {
-                int[] pre = new int[insertIndex];
-                int[] post = new int[firstRemovedArray.length - insertIndex];
-                System.arraycopy(firstRemovedArray, 0, pre, 0, insertIndex);
-                System.arraycopy(firstRemovedArray, insertIndex, post, 0, firstRemovedArray.length - insertIndex);
-                System.arraycopy(pre, 0, currentExpenditureRecords, 0, pre.length);
-                currentExpenditureRecords[insertIndex] = i;
-                System.arraycopy(post, 0, currentExpenditureRecords, insertIndex + 1, post.length);
-
-            }
-        }
-    }
-
-    private static int calculateInsertIndex(int[] firstRemovedArray, int i) {
-        int begin = 0;
-        int end = firstRemovedArray.length - 1;
-        while (begin <= end) {
-            int mid = (begin + end) / 2;
-            if (firstRemovedArray[mid] == i) {
-                return mid;
-            } else if (firstRemovedArray[mid] < i) {
-                if (mid == firstRemovedArray.length - 1) {
-                    return firstRemovedArray.length;
-                } else if (firstRemovedArray[mid + 1] > i) {
-                    return mid + 1;
-                } else {
-                    begin = mid + 1;
-                }
-            } else {
-                if (mid == 0) {
-                    return 0;
-                } else if (firstRemovedArray[mid - 1] < i) {
-                    return mid - 1;
-                } else {
-                    end = mid - 1;
-                }
-            }
-        }
-        return -1;
-    }
-
-    private static float calcMedian(int[] currentExpenditureRecords) {
-        if (currentExpenditureRecords.length % 2 == 1) {
-            return currentExpenditureRecords[currentExpenditureRecords.length / 2];
-        }
-        return (currentExpenditureRecords[currentExpenditureRecords.length / 2] + currentExpenditureRecords[(currentExpenditureRecords.length / 2) - 1]) / 2f;
-    }
 
     public static void main(String[] args) throws IOException {
 //        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
@@ -123,8 +118,23 @@ public class Solution {
 //        bufferedWriter.close();
 //
 //        scanner.close();
-        System.out.println(activityNotifications(new int[]{10, 20, 30, 40, 50}, 3));
-        System.out.println(activityNotifications(new int[]{2, 3, 4, 2, 3, 6, 8, 4, 5}, 5));
-        System.out.println(activityNotifications(new int[]{1, 2, 3, 4, 4}, 4));
+
+
+//
+//        System.err.println(String.format("Expected =%s , got =%s",0,activityNotifications(new int[]{10, 20, 30, 40, 50, 9, 8, 7, 6}, 5)));
+//        System.err.println(String.format("Expected =%s , got =%s",1,activityNotifications(new int[]{10, 20, 30, 40, 50}, 3)));
+//        System.err.println(String.format("Expected =%s , got =%s",2,activityNotifications(new int[]{2, 3, 4, 2, 3, 6, 8, 4, 5}, 5)));
+//        System.err.println(String.format("Expected =%s , got =%s",3,activityNotifications(new int[]{2, 3, 4, 2, 3, 6, 8, 4, 5,45}, 5)));
+//        System.err.println(String.format("Expected =%s , got =%s",3,activityNotifications(new int[]{2, 3, 4, 2, 3, 6, 8, 4, 5,45}, 5)));
+//        System.err.println(String.format("Expected =%s , got =%s",3,activityNotifications(new int[]{1,2,3,4,4}, 4)));
+        System.err.println(String.format("Expected =%s , got =%s", 0, activityNotifications(new int[]{10, 20, 30, 40, 4, 5}, 4)));
+        System.err.println(String.format("Expected =%s , got =%s", 0, activityNotifications(new int[]{10, 20, 30, 40, 10, 5}, 4)));
+        System.err.println(String.format("Expected =%s , got =%s", 0, activityNotifications(new int[]{10, 20, 30, 40, 11, 5}, 4)));
+        System.err.println(String.format("Expected =%s , got =%s", 0, activityNotifications(new int[]{10, 20, 30, 40, 20, 5}, 4)));
+        System.err.println(String.format("Expected =%s , got =%s", 0, activityNotifications(new int[]{10, 20, 30, 40, 21, 5}, 4)));
+        System.err.println(String.format("Expected =%s , got =%s", 0, activityNotifications(new int[]{10, 20, 30, 40, 30, 5}, 4)));
+        System.err.println(String.format("Expected =%s , got =%s", 0, activityNotifications(new int[]{10, 20, 30, 40, 31, 5}, 4)));
+        System.err.println(String.format("Expected =%s , got =%s", 0, activityNotifications(new int[]{10, 20, 30, 40, 40, 5}, 4)));
+        System.err.println(String.format("Expected =%s , got =%s", 0, activityNotifications(new int[]{10, 20, 30, 40, 41, 5}, 4)));
     }
 }
